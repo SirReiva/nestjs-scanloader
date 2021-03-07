@@ -10,7 +10,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScanLoaderModule = void 0;
 const common_1 = require("@nestjs/common");
 const glob_1 = require("glob");
-const node_path_1 = require("node:path");
 const path_1 = require("path");
 const ignoredFiles = ['**/*.d.ts', '**/*.js.map'];
 let ScanLoaderModule = ScanLoaderModule_1 = class ScanLoaderModule {
@@ -28,7 +27,7 @@ let ScanLoaderModule = ScanLoaderModule_1 = class ScanLoaderModule {
             }))
                 .reduce((acc, val) => [...acc, ...val], []);
             for (const providersFile of fileProviders) {
-                common_1.Logger.log('Scanning file ' + node_path_1.basename(providersFile), `${this.name}-${opts.name}`);
+                common_1.Logger.log('Scanning file ' + path_1.basename(providersFile), `${this.name}-${opts.name}`);
                 const s = require(providersFile);
                 const providersRequire = Object.values(s);
                 for (const provider of providersRequire) {
@@ -46,7 +45,7 @@ let ScanLoaderModule = ScanLoaderModule_1 = class ScanLoaderModule {
             }))
                 .reduce((acc, val) => [...acc, ...val], []);
             for (const controllerFile of fileControllers) {
-                common_1.Logger.log('Scanning file ' + node_path_1.basename(controllerFile), `${this.name}-${opts.name}`);
+                common_1.Logger.log('Scanning file ' + path_1.basename(controllerFile), `${this.name}-${opts.name}`);
                 const c = require(controllerFile);
                 const controllersRequire = Object.values(c);
                 for (const controller of controllersRequire) {
