@@ -21,6 +21,8 @@ export interface ScanOptions {
     export?: boolean;
 }
 
+const ignoredFiles = ['**/*.d.ts', '**/*.js.map'];
+
 @Module({})
 export class ScanLoaderModule {
     static register(opts: ScanOptions): DynamicModule {
@@ -36,13 +38,13 @@ export class ScanLoaderModule {
             const fileProviders: string[] = opts.providersPaths
                 .map((path) =>
                     sync(join(opts.basePath, path), {
-                        ignore: ['**/*.d.ts', ...defIgnores],
+                        ignore: [...ignoredFiles, ...defIgnores],
                     }),
                 )
                 .reduce((acc, val) => [...acc, ...val], []);
 
             for (const providersFile of fileProviders) {
-                const { ...s } = require(providersFile);
+                const s = require(providersFile);
                 const providersRequire: any[] = Object.values(s);
                 for (const provider of providersRequire) {
                     Logger.log(`${provider.name} loaded`, this.name);
@@ -57,13 +59,13 @@ export class ScanLoaderModule {
             const fileControllers: string[] = opts.controllersPaths
                 .map((path) =>
                     sync(join(opts.basePath, path), {
-                        ignore: ['**/*.d.ts', ...defIgnores],
+                        ignore: [...ignoredFiles, ...defIgnores],
                     }),
                 )
                 .reduce((acc, val) => [...acc, ...val], []);
 
             for (const controllerFile of fileControllers) {
-                const { ...c } = require(controllerFile);
+                const c = require(controllerFile);
                 const controllersRequire: any[] = Object.values(c);
                 for (const controller of controllersRequire) {
                     Logger.log(`${controller.name} loaded`, this.name);
