@@ -1,5 +1,6 @@
 import { DynamicModule, ForwardReference, Provider, Type } from '@nestjs/common';
 export interface ScanOptions {
+    name: string;
     basePath: string;
     controllersPaths?: string[];
     providersPaths?: string[];
