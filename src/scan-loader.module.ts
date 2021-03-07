@@ -7,6 +7,7 @@ import {
     Type,
 } from '@nestjs/common';
 import { sync } from 'glob';
+import { basename } from 'node:path';
 import { join } from 'path';
 
 export interface ScanOptions {
@@ -45,6 +46,10 @@ export class ScanLoaderModule {
                 .reduce((acc, val) => [...acc, ...val], []);
 
             for (const providersFile of fileProviders) {
+                Logger.log(
+                    'Scanning file ' + basename(providersFile),
+                    `${this.name}-${opts.name}`,
+                );
                 const s = require(providersFile);
                 const providersRequire: any[] = Object.values(s);
                 for (const provider of providersRequire) {
@@ -69,6 +74,10 @@ export class ScanLoaderModule {
                 .reduce((acc, val) => [...acc, ...val], []);
 
             for (const controllerFile of fileControllers) {
+                Logger.log(
+                    'Scanning file ' + basename(controllerFile),
+                    `${this.name}-${opts.name}`,
+                );
                 const c = require(controllerFile);
                 const controllersRequire: any[] = Object.values(c);
                 for (const controller of controllersRequire) {
