@@ -7,8 +7,7 @@ import {
     Type,
 } from '@nestjs/common';
 import { sync } from 'glob';
-import { basename } from 'node:path';
-import { join } from 'path';
+import { join, basename } from 'path';
 
 export interface ScanOptions {
     name: string;
