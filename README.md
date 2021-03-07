@@ -36,6 +36,7 @@ export class AppModule {}
 
 ```TS
 export interface ScanOptions {
+    name: string;
     basePath: string;
     controllersPaths?: string[];
     providersPaths?: string[];
@@ -48,6 +49,7 @@ export interface ScanOptions {
 }
 ```
 
+-   name: identifier of current register for logs.
 -   basePath: url root for controllersPaths and providersPaths.
 -   controllersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match controllers.
 -   providersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match providers.

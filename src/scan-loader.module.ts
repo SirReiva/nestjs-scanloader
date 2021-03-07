@@ -10,6 +10,7 @@ import { sync } from 'glob';
 import { join } from 'path';
 
 export interface ScanOptions {
+    name: string;
     basePath: string;
     controllersPaths?: string[];
     providersPaths?: string[];
@@ -30,11 +31,11 @@ export class ScanLoaderModule {
         const defImports = opts.imports || [];
         const defIgnores = opts.ignores || [];
 
-        Logger.log('Start scanning...', this.name);
+        Logger.log('Start scanning...', `${this.name}-${opts.name}`);
 
         const providers: Provider<any>[] = [];
         if (opts.providersPaths) {
-            Logger.log('Scanning Providers...', this.name);
+            Logger.log('Scanning Providers...', `${this.name}-${opts.name}`);
             const fileProviders: string[] = opts.providersPaths
                 .map((path) =>
                     sync(join(opts.basePath, path), {
@@ -47,7 +48,10 @@ export class ScanLoaderModule {
                 const s = require(providersFile);
                 const providersRequire: any[] = Object.values(s);
                 for (const provider of providersRequire) {
-                    Logger.log(`${provider.name} loaded`, this.name);
+                    Logger.log(
+                        `${provider.name} loaded`,
+                        `${this.name}-${opts.name}`,
+                    );
                     providers.push(provider as Provider<any>);
                 }
             }
@@ -55,7 +59,7 @@ export class ScanLoaderModule {
 
         const controllers: Type<any>[] = [];
         if (opts.controllersPaths) {
-            Logger.log('Scanning Controllers...', this.name);
+            Logger.log('Scanning Controllers...', `${this.name}-${opts.name}`);
             const fileControllers: string[] = opts.controllersPaths
                 .map((path) =>
                     sync(join(opts.basePath, path), {
@@ -68,13 +72,16 @@ export class ScanLoaderModule {
                 const c = require(controllerFile);
                 const controllersRequire: any[] = Object.values(c);
                 for (const controller of controllersRequire) {
-                    Logger.log(`${controller.name} loaded`, this.name);
+                    Logger.log(
+                        `${controller.name} loaded`,
+                        `${this.name}-${opts.name}`,
+                    );
                     controllers.push(controller as Type<any>);
                 }
             }
         }
 
-        Logger.log('Scan sucessfull', this.name);
+        Logger.log('Scan sucessfull', `${this.name}-${opts.name}`);
         return {
             controllers,
             module: ScanLoaderModule,
