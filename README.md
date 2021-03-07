@@ -22,6 +22,7 @@ import { ScanLoaderModule } from 'nestjs-scanloader';
 @Module({
     imports: [
         ScanLoaderModule.register({
+            name: 'test',
             basePath: __dirname,
             controllersPaths: ['/controllers/**/*.controller.js'],
             providersPaths: ['/services/**/*.service.js'],
