@@ -1,3 +1,7 @@
-import { ScanOptions, ScanLoaderModule } from './scan-loader.module';
+import {
+    ScanOptions,
+    ScanLoaderModule,
+    ScanModule,
+} from './scan-loader.module';
 
-export { ScanOptions, ScanLoaderModule };
+export { ScanOptions, ScanLoaderModule, ScanModule };

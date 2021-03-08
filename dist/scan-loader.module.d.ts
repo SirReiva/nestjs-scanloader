@@ -1,4 +1,4 @@
-import { DynamicModule, ForwardReference, Provider, Type } from '@nestjs/common';
+import { DynamicModule, ForwardReference, ModuleMetadata, Provider, Type } from '@nestjs/common';
 export interface ScanOptions {
     name: string;
     basePath: string;
@@ -9,7 +9,14 @@ export interface ScanOptions {
     providers?: Provider<any>[];
     export?: boolean;
 }
+export interface IScanOptions {
+    basePath: string;
+    controllersPaths?: string[];
+    providersPaths?: string[];
+    ignores?: string[];
+}
 export declare class ScanLoaderModule {
     static register(opts: ScanOptions): DynamicModule;
 }
+export declare function ScanModule(metadata: ModuleMetadata & IScanOptions): ClassDecorator;
 //# sourceMappingURL=scan-loader.module.d.ts.map
