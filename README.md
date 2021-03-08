@@ -33,6 +33,23 @@ import { ScanLoaderModule } from 'nestjs-scanloader';
 export class AppModule {}
 ```
 
+## Example using module decorator
+
+```TS
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { ScanModule } from 'nestjs-scanloader';
+
+
+@ScanModule({
+    basePath: __dirname,
+    controllersPaths: ['/controllers/**/*.controller.*'],
+    providersPaths: ['/services/**/*.service.*'],
+    imports: [JwtModule.register({})],
+})
+export class AppModule {}
+```
+
 ## Register options
 
 ```TS
@@ -57,6 +74,24 @@ export interface ScanOptions {
 -   imports: list of dependecies modules for autolad provides and controllers.
 -   ignores: list of [Glob](https://www.npmjs.com/package/glob) expresions for ignore during scan.
 -   export: if autoload providers need to be exported.
+
+## Module decorator options
+
+Extends default metadata for Module Nest decorator
+
+```TS
+export interface IScanOptions {
+    basePath: string;
+    controllersPaths?: string[];
+    providersPaths?: string[];
+    ignores?: string[];
+}
+```
+
+-   basePath: url root for controllersPaths and providersPaths.
+-   controllersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match controllers.
+-   providersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match providers.
+-   ignores: list of [Glob](https://www.npmjs.com/package/glob) expresions for ignore during scan.
 
 ## License
 
