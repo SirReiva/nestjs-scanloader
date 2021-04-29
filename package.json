@@ -22,7 +22,7 @@
     "dependencies": {
         "@nestjs/common": "^7.6.13",
         "glob": "^7.1.6",
-        "rxjs": "^6.6.6"
+        "rxjs": "^7.0.0"
     },
     "devDependencies": {
         "@types/glob": "^7.1.3",
