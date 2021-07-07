@@ -20,7 +20,7 @@
     "author": "Reiva",
     "license": "MIT",
     "dependencies": {
-        "@nestjs/common": "^7.6.13",
+        "@nestjs/common": "^8.0.0",
         "glob": "^7.1.6",
         "rxjs": "^7.0.0"
     },
