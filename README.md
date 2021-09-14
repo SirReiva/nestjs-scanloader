@@ -69,10 +69,10 @@ export interface ScanOptions {
 
 -   name: identifier of current register for logs.
 -   basePath: url root for controllersPaths and providersPaths.
--   controllersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match controllers.
--   providersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match providers.
+-   controllersPaths: list of [Glob](https://www.npmjs.com/package/glob) expressions for match controllers.
+-   providersPaths: list of [Glob](https://www.npmjs.com/package/glob) expressions for match providers.
 -   imports: list of dependecies modules for autolad provides and controllers.
--   ignores: list of [Glob](https://www.npmjs.com/package/glob) expresions for ignore during scan.
+-   ignores: list of [Glob](https://www.npmjs.com/package/glob) expressions for ignore during scan.
 -   export: if autoload providers need to be exported.
 
 ## Module decorator options
@@ -89,9 +89,9 @@ export interface IScanOptions {
 ```
 
 -   basePath: url root for controllersPaths and providersPaths.
--   controllersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match controllers.
--   providersPaths: list of [Glob](https://www.npmjs.com/package/glob) expresions for match providers.
--   ignores: list of [Glob](https://www.npmjs.com/package/glob) expresions for ignore during scan.
+-   controllersPaths: list of [Glob](https://www.npmjs.com/package/glob) expressions for match controllers.
+-   providersPaths: list of [Glob](https://www.npmjs.com/package/glob) expressions for match providers.
+-   ignores: list of [Glob](https://www.npmjs.com/package/glob) expressions for ignore during scan.
 
 ## License
 
