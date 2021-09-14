@@ -20,7 +20,7 @@ var ScanLoaderModule_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScanModule = exports.ScanLoaderModule = void 0;
 const common_1 = require("@nestjs/common");
-const glob_1 = require("glob");
+const fast_glob_1 = require("fast-glob");
 const path_1 = require("path");
 const ignoredFiles = ['**/*.d.ts', '**/*.js.map'];
 const scanLoader = (pathsProviders, pathsControllers, basePath, ignores, name) => {
@@ -28,12 +28,12 @@ const scanLoader = (pathsProviders, pathsControllers, basePath, ignores, name) =
     if (pathsProviders.length > 0) {
         common_1.Logger.log('Scanning Providers...', name);
         const fileProviders = pathsProviders
-            .map((path) => glob_1.sync(path_1.join(basePath, path), {
+            .map((path) => (0, fast_glob_1.sync)((0, path_1.join)(basePath, path), {
             ignore: [...ignoredFiles, ...ignores],
         }))
             .reduce((acc, val) => [...acc, ...val], []);
         for (const providersFile of fileProviders) {
-            common_1.Logger.log('Scanning file ' + path_1.basename(providersFile), name);
+            common_1.Logger.log('Scanning file ' + (0, path_1.basename)(providersFile), name);
             const s = require(providersFile);
             const providersRequire = Object.values(s);
             for (const provider of providersRequire) {
@@ -46,12 +46,12 @@ const scanLoader = (pathsProviders, pathsControllers, basePath, ignores, name) =
     if (pathsControllers.length > 0) {
         common_1.Logger.log('Scanning Controllers...', name);
         const fileControllers = pathsControllers
-            .map((path) => glob_1.sync(path_1.join(basePath, path), {
+            .map((path) => (0, fast_glob_1.sync)((0, path_1.join)(basePath, path), {
             ignore: [...ignoredFiles, ...ignores],
         }))
             .reduce((acc, val) => [...acc, ...val], []);
         for (const controllerFile of fileControllers) {
-            common_1.Logger.log('Scanning file ' + path_1.basename(controllerFile), name);
+            common_1.Logger.log('Scanning file ' + (0, path_1.basename)(controllerFile), name);
             const c = require(controllerFile);
             const controllersRequire = Object.values(c);
             for (const controller of controllersRequire) {
@@ -85,7 +85,7 @@ let ScanLoaderModule = ScanLoaderModule_1 = class ScanLoaderModule {
     }
 };
 ScanLoaderModule = ScanLoaderModule_1 = __decorate([
-    common_1.Module({})
+    (0, common_1.Module)({})
 ], ScanLoaderModule);
 exports.ScanLoaderModule = ScanLoaderModule;
 function ScanModule(metadata) {
@@ -96,7 +96,7 @@ function ScanModule(metadata) {
                 ...(nestModuleMetadata.controllers || []),
                 ...controllers,
             ], providers: [...(nestModuleMetadata.providers || []), ...providers] });
-        common_1.Module(finalMetadata)(target);
+        (0, common_1.Module)(finalMetadata)(target);
     };
 }
 exports.ScanModule = ScanModule;

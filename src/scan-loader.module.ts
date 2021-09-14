@@ -7,7 +7,7 @@ import {
     Provider,
     Type,
 } from '@nestjs/common';
-import { sync } from 'glob';
+import { sync } from 'fast-glob';
 import { join, basename } from 'path';
 
 export interface ScanOptions {
