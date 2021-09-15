@@ -23,39 +23,44 @@ const common_1 = require("@nestjs/common");
 const fast_glob_1 = require("fast-glob");
 const path_1 = require("path");
 const ignoredFiles = ['**/*.d.ts', '**/*.js.map'];
+const logger = new common_1.Logger('ScanLoaderModule', {
+    timestamp: true,
+});
 const scanLoader = (pathsProviders, pathsControllers, basePath, ignores, name) => {
     const providers = [];
     if (pathsProviders.length > 0) {
-        common_1.Logger.log('Scanning Providers...', name);
+        logger.log('Scanning Providers...', name);
         const fileProviders = pathsProviders
-            .map((path) => (0, fast_glob_1.sync)((0, path_1.join)(basePath, path), {
+            .map((path) => (0, fast_glob_1.sync)((0, path_1.join)(basePath, path).replace(/\\/g, '/'), {
             ignore: [...ignoredFiles, ...ignores],
+            absolute: true,
         }))
             .reduce((acc, val) => [...acc, ...val], []);
         for (const providersFile of fileProviders) {
-            common_1.Logger.log('Scanning file ' + (0, path_1.basename)(providersFile), name);
+            logger.log('Scanning file ' + (0, path_1.basename)(providersFile), name);
             const s = require(providersFile);
             const providersRequire = Object.values(s);
             for (const provider of providersRequire) {
-                common_1.Logger.log(`${provider.name} loaded`, name);
+                logger.log(`${provider.name} loaded`, name);
                 providers.push(provider);
             }
         }
     }
     const controllers = [];
     if (pathsControllers.length > 0) {
-        common_1.Logger.log('Scanning Controllers...', name);
+        logger.log('Scanning Controllers...', name);
         const fileControllers = pathsControllers
-            .map((path) => (0, fast_glob_1.sync)((0, path_1.join)(basePath, path), {
+            .map((path) => (0, fast_glob_1.sync)((0, path_1.join)(basePath, path).replace(/\\/g, '/'), {
             ignore: [...ignoredFiles, ...ignores],
+            absolute: true,
         }))
             .reduce((acc, val) => [...acc, ...val], []);
         for (const controllerFile of fileControllers) {
-            common_1.Logger.log('Scanning file ' + (0, path_1.basename)(controllerFile), name);
+            logger.log('Scanning file ' + (0, path_1.basename)(controllerFile), name);
             const c = require(controllerFile);
             const controllersRequire = Object.values(c);
             for (const controller of controllersRequire) {
-                common_1.Logger.log(`${controller.name} loaded`, name);
+                logger.log(`${controller.name} loaded`, name);
                 controllers.push(controller);
             }
         }
@@ -70,9 +75,9 @@ let ScanLoaderModule = ScanLoaderModule_1 = class ScanLoaderModule {
         const defProviders = opts.providers || [];
         const defImports = opts.imports || [];
         const defIgnores = opts.ignores || [];
-        common_1.Logger.log('Start scanning...', `${this.name}-${opts.name}`);
+        logger.log('Start scanning...', `${this.name}-${opts.name}`);
         const { controllers, providers } = scanLoader(opts.providersPaths || [], opts.controllersPaths || [], opts.basePath, defIgnores, `${this.name}-${opts.name}`);
-        common_1.Logger.log('Scan sucessfull', `${this.name}-${opts.name}`);
+        logger.log('Scan sucessfull', `${this.name}-${opts.name}`);
         return {
             controllers,
             module: ScanLoaderModule_1,
