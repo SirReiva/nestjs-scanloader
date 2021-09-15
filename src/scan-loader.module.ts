@@ -37,6 +37,10 @@ export interface IScanOptions {
 
 const ignoredFiles = ['**/*.d.ts', '**/*.js.map'];
 
+const logger = new Logger('ScanLoaderModule', {
+    timestamp: true,
+});
+
 const scanLoader = (
     pathsProviders: string[],
     pathsControllers: string[],
@@ -46,7 +50,7 @@ const scanLoader = (
 ): ILoaderResult => {
     const providers: Provider<any>[] = [];
     if (pathsProviders.length > 0) {
-        Logger.log('Scanning Providers...', name);
+        logger.log('Scanning Providers...', name);
         const fileProviders: string[] = pathsProviders
             .map((path) =>
                 sync(join(basePath, path).replace(/\\/g, '/'), {
@@ -57,11 +61,11 @@ const scanLoader = (
             .reduce((acc, val) => [...acc, ...val], []);
 
         for (const providersFile of fileProviders) {
-            Logger.log('Scanning file ' + basename(providersFile), name);
+            logger.log('Scanning file ' + basename(providersFile), name);
             const s = require(providersFile);
             const providersRequire: any[] = Object.values(s);
             for (const provider of providersRequire) {
-                Logger.log(`${provider.name} loaded`, name);
+                logger.log(`${provider.name} loaded`, name);
                 providers.push(provider as Provider<any>);
             }
         }
@@ -69,7 +73,7 @@ const scanLoader = (
 
     const controllers: Type<any>[] = [];
     if (pathsControllers.length > 0) {
-        Logger.log('Scanning Controllers...', name);
+        logger.log('Scanning Controllers...', name);
         const fileControllers: string[] = pathsControllers
             .map((path) =>
                 sync(join(basePath, path).replace(/\\/g, '/'), {
@@ -80,11 +84,11 @@ const scanLoader = (
             .reduce((acc, val) => [...acc, ...val], []);
 
         for (const controllerFile of fileControllers) {
-            Logger.log('Scanning file ' + basename(controllerFile), name);
+            logger.log('Scanning file ' + basename(controllerFile), name);
             const c = require(controllerFile);
             const controllersRequire: any[] = Object.values(c);
             for (const controller of controllersRequire) {
-                Logger.log(`${controller.name} loaded`, name);
+                logger.log(`${controller.name} loaded`, name);
                 controllers.push(controller as Type<any>);
             }
         }
@@ -103,7 +107,7 @@ export class ScanLoaderModule {
         const defImports = opts.imports || [];
         const defIgnores = opts.ignores || [];
 
-        Logger.log('Start scanning...', `${this.name}-${opts.name}`);
+        logger.log('Start scanning...', `${this.name}-${opts.name}`);
 
         const { controllers, providers } = scanLoader(
             opts.providersPaths || [],
@@ -113,7 +117,7 @@ export class ScanLoaderModule {
             `${this.name}-${opts.name}`,
         );
 
-        Logger.log('Scan sucessfull', `${this.name}-${opts.name}`);
+        logger.log('Scan sucessfull', `${this.name}-${opts.name}`);
         return {
             controllers,
             module: ScanLoaderModule,
