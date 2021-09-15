@@ -49,8 +49,9 @@ const scanLoader = (
         Logger.log('Scanning Providers...', name);
         const fileProviders: string[] = pathsProviders
             .map((path) =>
-                sync(join(basePath, path), {
+                sync(join(basePath, path).replace(/\\/g, '/'), {
                     ignore: [...ignoredFiles, ...ignores],
+                    absolute: true,
                 }),
             )
             .reduce((acc, val) => [...acc, ...val], []);
@@ -71,8 +72,9 @@ const scanLoader = (
         Logger.log('Scanning Controllers...', name);
         const fileControllers: string[] = pathsControllers
             .map((path) =>
-                sync(join(basePath, path), {
+                sync(join(basePath, path).replace(/\\/g, '/'), {
                     ignore: [...ignoredFiles, ...ignores],
+                    absolute: true,
                 }),
             )
             .reduce((acc, val) => [...acc, ...val], []);
