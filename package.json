@@ -1,6 +1,6 @@
 {
     "name": "nestjs-scanloader",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "nestjs scan & autoload providers and controllers",
     "main": "dist/index.js",
     "types": "dist/index",
@@ -21,17 +21,17 @@
     "author": "Reiva",
     "license": "MIT",
     "dependencies": {
-        "@nestjs/common": "^8.0.1",
+        "@nestjs/common": "^8.0.10",
         "fast-glob": "^3.2.7",
-        "rxjs": "^7.2.0"
+        "rxjs": "^7.3.1"
     },
     "devDependencies": {
-        "@nestjs/core": "8.0.10",
-        "@nestjs/platform-express": "8.0.10",
-        "@nestjs/testing": "8.0.10",
-        "@types/jest": "27.0.2",
-        "@types/node": "^16.9.1",
-        "jest": "27.2.3",
+        "@nestjs/core": "^8.0.10",
+        "@nestjs/platform-express": "^8.0.10",
+        "@nestjs/testing": "^8.0.10",
+        "@types/jest": "^27.0.2",
+        "@types/node": "^16.10.3",
+        "jest": "^27.2.4",
         "reflect-metadata": "^0.1.13",
         "rimraf": "3.0.2",
         "ts-jest": "^27.0.5",
