@@ -29,7 +29,7 @@
         "@nestjs/core": "8.4.6",
         "@nestjs/platform-express": "8.4.6",
         "@nestjs/testing": "8.4.6",
-        "@types/jest": "27.5.1",
+        "@types/jest": "27.5.2",
         "@types/node": "16.11.38",
         "jest": "28.1.0",
         "reflect-metadata": "0.1.13",
