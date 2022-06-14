@@ -26,9 +26,9 @@
         "rxjs": "^7.3.1"
     },
     "devDependencies": {
-        "@nestjs/core": "8.4.6",
-        "@nestjs/platform-express": "8.4.6",
-        "@nestjs/testing": "8.4.6",
+        "@nestjs/core": "8.4.7",
+        "@nestjs/platform-express": "8.4.7",
+        "@nestjs/testing": "8.4.7",
         "@types/jest": "27.5.2",
         "@types/node": "16.11.39",
         "jest": "28.1.0",
