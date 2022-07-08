@@ -21,14 +21,14 @@
     "author": "Reiva",
     "license": "MIT",
     "dependencies": {
-        "@nestjs/common": "^8.4.7",
+        "@nestjs/common": "^9.0.0",
         "fast-glob": "^3.2.11",
         "rxjs": "^7.5.5"
     },
     "devDependencies": {
-        "@nestjs/core": "8.4.7",
-        "@nestjs/platform-express": "8.4.7",
-        "@nestjs/testing": "8.4.7",
+        "@nestjs/core": "9.0.1",
+        "@nestjs/platform-express": "9.0.1",
+        "@nestjs/testing": "9.0.1",
         "@types/jest": "28.1.4",
         "@types/node": "18.0.0",
         "jest": "28.1.2",
