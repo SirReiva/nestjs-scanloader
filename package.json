@@ -27,7 +27,7 @@
     },
     "devDependencies": {
         "@nestjs/core": "10.2.0",
-        "@nestjs/platform-express": "10.2.0",
+        "@nestjs/platform-express": "10.2.1",
         "@nestjs/testing": "10.2.0",
         "@types/jest": "29.5.3",
         "@types/node": "18.17.6",
